@@ -1,5 +1,9 @@
 var serviceAccount = require("./portfolio-29765-firebase-adminsdk-tvk6j-96416ba553.json");
+
 var admin = require("firebase-admin");
+const express = require("express");
+var cors = require('cors')
+
 const app_fire = admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
@@ -36,7 +40,6 @@ async function getUser(){
 
 
 //Add Express
-const express = require("express");
 
 // Initialize Express
 const app = express();
