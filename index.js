@@ -41,6 +41,12 @@ const express = require("express");
 // Initialize Express
 const app = express();
 
+var corsOptions = {
+    origin: 'http://localhost:8080',
+    optionsSuccessStatus: 200 // For legacy browser support
+}
+
+app.use(cors(corsOptions));
 // Create GET request
 app.get("/", (req, res) => {
   res.send("Express on Vercel");
