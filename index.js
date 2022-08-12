@@ -45,7 +45,7 @@ async function getUser(){
 const app = express();
 
 var corsOptions = {
-    origin: 'http://victor.barlier.free.fr/',
+    origin: 'http://victor.barlier.free.fr',
     optionsSuccessStatus: 200 // For legacy browser support
 }
 
