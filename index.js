@@ -42,7 +42,7 @@ const express = require("express");
 const app = express();
 
 var corsOptions = {
-    origin: 'http://localhost:8080',
+    origin: 'http://victor.barlier.free.fr/',
     optionsSuccessStatus: 200 // For legacy browser support
 }
 
