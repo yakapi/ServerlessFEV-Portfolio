@@ -44,12 +44,26 @@ async function getUser(){
 // Initialize Express
 const app = express();
 
-var corsOptions = {
-    origin: 'http://victor.barlier.free.fr',
-    optionsSuccessStatus: 200 // For legacy browser support
+const allowlist = ['http://victor.barlier.free.fr'];
+
+    const corsOptionsDelegate = (req, callback) => {
+    let corsOptions;
+
+    let isDomainAllowed = whitelist.indexOf(req.header('Origin')) !== -1;
+    let isExtensionAllowed = req.path.endsWith('.jpg');
+
+    if (isDomainAllowed && isExtensionAllowed) {
+        // Enable CORS for this request
+        corsOptions = { origin: true }
+    } else {
+        // Disable CORS for this request
+        corsOptions = { origin: false }
+    }
+    callback(null, corsOptions)
 }
 
-app.use(cors(corsOptions));
+app.use(cors(corsOptionsDelegate));
+
 // Create GET request
 app.get("/", (req, res) => {
   res.send("Express on Vercel");
