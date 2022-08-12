@@ -63,6 +63,7 @@ const allowlist = ['http://victor.barlier.free.fr', 'http://victor.barlier.free.
 }
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", true);
+  res.header("Access-Control-All-Credentials", true)
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
