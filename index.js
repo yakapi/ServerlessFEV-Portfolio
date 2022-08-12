@@ -44,7 +44,7 @@ async function getUser(){
 // Initialize Express
 const app = express();
 
-const allowlist = ['http://victor.barlier.free.fr'];
+const allowlist = ['http://victor.barlier.free.fr', 'http://victor.barlier.free.fr/'];
 
     const corsOptionsDelegate = (req, callback) => {
     let corsOptions;
