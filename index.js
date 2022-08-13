@@ -52,8 +52,8 @@ async function getUser(){
 
 async function getAllProjects(){
   const projects = db.collectionGroup("projets")
-  projects.get().then((querySnapshot) =>{
-    let projects_doc = []
+  let projects_doc = []
+  await projects.get().then((querySnapshot) =>{
     querySnapshot.forEach((document) => {
       let projet_doc = {
         id: document.data().id,
@@ -63,10 +63,10 @@ async function getAllProjects(){
         img_url: document.data().img_url
       }
       projects_doc.push(projet_doc)
-      console.log(document.data());
+      // console.log(document.data());
     });
-    return console.log("hello");
   })
+  return projects_doc
 }
 
 //Add Express
@@ -92,9 +92,9 @@ app.get("/users", (req, res) => {
 // );
 });
 app.get("/projets", async(req, res, next) => {
-  let projects =   await getAllProjects(db)
-  let test = console.log(projects);
-  res.json(test);
+  let projects = await getAllProjects(db)
+  console.log(projects);
+  res.json(projects);
 });
 // Initialize server
 app.listen(5000, () => {
