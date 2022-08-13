@@ -50,35 +50,30 @@ async function getUser(){
   }
 }
 
+async function getAllProjects(){
+  const projects = db.collection("projets")
+  projects.get().then((querySnapshot) =>{
+    let projects_doc = []
+    querySnapshot.forEach((document) => {
+      let projet_doc = {
+        id: document.data().id,
+        title: document.data().title,
+        describe: document.data().describe,
+        link_project: document.data().link_project,
+        img_url: document.data().img_url
+      }
+      projects_doc.push(projet_doc)
+      console.log(document.data());
+    });
+    return projects_doc
+  })
+}
 
 //Add Express
 
 // Initialize Express
 const app = express();
 
-const allowlist = ['http://victor.barlier.free.fr', 'http://victor.barlier.free.fr/'];
-
-    const corsOptionsDelegate = (req, callback) => {
-    let corsOptions;
-
-    let isDomainAllowed = whitelist.indexOf(req.header('Origin')) !== -1;
-    let isExtensionAllowed = req.path.endsWith('.jpg');
-
-    if (isDomainAllowed && isExtensionAllowed) {
-        // Enable CORS for this request
-        corsOptions = { origin: true }
-    } else {
-        // Disable CORS for this request
-        corsOptions = { origin: false }
-    }
-    callback(null, corsOptions)
-}
-// app.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "http://www.victor.barlier.free.fr");
-//   res.header("Access-Control-Allow-Credentials", true)
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   next();
-// });
 app.use(cors({
   origin: "http://www.victor.barlier.free.fr",
   credentials: true
@@ -89,12 +84,16 @@ app.get("/", (req, res) => {
   res.send("Express on Vercel");
 });
 app.get("/user", async(req, res, next) => {
-  let test =   await getUser(db)
-  res.json(test);
+  let user =   await getUser(db)
+  res.json(user);
 });
 app.get("/users", (req, res) => {
-  res.send(getAllUsers(db)
-);
+//   res.send(getAllUsers(db)
+// );
+});
+app.get("/projets", async(req, res, next) => {
+  let projects =   await getAllProjects(db)
+  res.json(projects);
 });
 // Initialize server
 app.listen(5000, () => {
