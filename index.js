@@ -68,7 +68,23 @@ async function getAllProjects(){
   })
   return projects_doc
 }
-
+async function getAllMedias(){
+  const medias = db.collectionGroup("media")
+  let medias_doc = []
+  await medias.get().then((querySnapshot) =>{
+    querySnapshot.forEach((document) => {
+      let media_doc = {
+        id: document.data().id,
+        name: document.data().name,
+        url_link: document.data().url_link,
+        img_url: document.data().img_url,
+      }
+      medias_doc.push(media_doc)
+      // console.log(document.data());
+    });
+  })
+  return medias_doc
+}
 //Add Express
 
 // Initialize Express
@@ -93,8 +109,11 @@ app.get("/users", (req, res) => {
 });
 app.get("/projets", async(req, res, next) => {
   let projects = await getAllProjects(db)
-  console.log(projects);
   res.json(projects);
+});
+app.get("/medias", async(req, res, next) => {
+  let medias = await getAllMedias(db)
+  res.json(medias);
 });
 // Initialize server
 app.listen(5000, () => {
