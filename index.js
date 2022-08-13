@@ -65,7 +65,7 @@ async function getAllProjects(){
       projects_doc.push(projet_doc)
       console.log(document.data());
     });
-    return projects_doc
+    return console.log("hello");
   })
 }
 
