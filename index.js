@@ -75,7 +75,7 @@ async function getAllProjects(){
 const app = express();
 
 app.use(cors({
-  origin: "http://www.victor.barlier.free.fr",
+  origin: "http://victor.barlier.free.fr",
   credentials: true
 }))
 
