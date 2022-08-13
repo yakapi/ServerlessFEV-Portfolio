@@ -51,8 +51,9 @@ async function getUser(){
 }
 
 async function getAllProjects(){
-  const projects = db.collection("projets")
+  const projects = db.collectionGroup("projets")
   projects.get().then((querySnapshot) =>{
+    let projects_doc = []
     querySnapshot.forEach((document) => {
       let projet_doc = {
         id: document.data().id,
@@ -64,7 +65,6 @@ async function getAllProjects(){
       projects_doc.push(projet_doc)
       console.log(document.data());
     });
-    let projects_doc = {test: "hello"}
     return projects_doc
   })
 }
