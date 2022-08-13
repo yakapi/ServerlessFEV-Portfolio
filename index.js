@@ -53,7 +53,7 @@ async function getUser(){
 async function getAllProjects(){
   const projects = db.collection("projets")
   projects.get().then((querySnapshot) =>{
-    let projects_doc = []
+    let projects_doc = {test: "hello"}
     querySnapshot.forEach((document) => {
       let projet_doc = {
         id: document.data().id,
