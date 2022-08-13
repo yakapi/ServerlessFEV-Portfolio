@@ -93,7 +93,8 @@ app.get("/users", (req, res) => {
 });
 app.get("/projets", async(req, res, next) => {
   let projects =   await getAllProjects(db)
-  res.json(projects);
+  let test = "hello"
+  res.json(test);
 });
 // Initialize server
 app.listen(5000, () => {
