@@ -85,6 +85,25 @@ async function getAllMedias(){
   })
   return medias_doc
 }
+
+async function getAllSkills(){
+  const skills = db.collectionGroup("skills")
+  let skills_doc = []
+  await skills.get().then((querySnapshot) =>{
+    querySnapshot.forEach((document) => {
+      let skill_doc = {
+        id: document.data().id,
+        name: document.data().name,
+        img_url: document.data().img_url,
+      }
+      skills_doc.push(skill_doc)
+      // console.log(document.data());
+    });
+  })
+  return skills_doc
+
+}
+
 //Add Express
 
 // Initialize Express
@@ -114,6 +133,10 @@ app.get("/projets", async(req, res, next) => {
 app.get("/medias", async(req, res, next) => {
   let medias = await getAllMedias(db)
   res.json(medias);
+});
+app.get("/skills", async(req, res, next) => {
+  let skills = await getAllSkills(db)
+  res.json(skills);
 });
 // Initialize server
 app.listen(5000, () => {
